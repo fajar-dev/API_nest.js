@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UseFilters, InternalServerErrorException } from "@nestjs/common";
-import { UserService } from "./user.service";
-import { CreateUserDto } from "./create-user.dto";
+import { NotesService } from "./notes.service";
+import { CreateNotesDto } from "./create-notes.dto";
 
-@Controller('users')
-export class UserController{
+@Controller('notes')
+export class NotesController{
   
-  constructor(private readonly userService: UserService){}
+  constructor(private readonly notesService: NotesService){}
 
   @Get()
   async findAll(){
@@ -13,8 +13,8 @@ export class UserController{
       return{
         respons: 200,
         success: true,
-        message: 'Read all user',
-        data: await this.userService.findAll()
+        message: 'Read all note',
+        data: await this.notesService.findAll()
       };
     } catch (error) {
       throw new InternalServerErrorException('Error while fetching tasks');
@@ -27,8 +27,8 @@ export class UserController{
       return{
         respons: 200,
         success: true,
-        message: 'Read user by id: ' + id,
-        data: await this.userService.findOne(id)
+        message: 'Read note by id: ' + id,
+        data: await this.notesService.findOne(id)
       };
     } catch (error) {
       throw new InternalServerErrorException('Error while fetching tasks');
@@ -36,13 +36,13 @@ export class UserController{
   }
 
   @Post('/create')
-  async create( @Body() data: CreateUserDto) {
+  async create( @Body() data: CreateNotesDto) {
     try {
       return{
-        respons: 200,
+        respons: 201,
         success: true,
-        message: 'Create user',
-        data: await this.userService.create(data)
+        message: 'Create note',
+        data: await this.notesService.create(data)
       };
     } catch (error) {
       throw new InternalServerErrorException('Error while fetching tasks');
@@ -50,13 +50,13 @@ export class UserController{
   }
 
   @Put('/update/:id')
-  async update( @Body() data: CreateUserDto,  @Param('id') id: number) {
+  async update( @Body() data: CreateNotesDto,  @Param('id') id: number) {
     try {
       return{
         respons: 200,
         success: true,
-        message: 'Update user by id '+ id,
-        data: await this.userService.update(data, id)
+        message: 'Update note by id '+ id,
+        data: await this.notesService.update(data, id)
       };
     } catch (error) {
       throw new InternalServerErrorException('Error while fetching tasks');
@@ -64,14 +64,13 @@ export class UserController{
   }
 
   @Delete('/delete/:id')
-  @HttpCode(HttpStatus.NO_CONTENT)
   async delete( @Param('id') id: number) {
     try {
       return{
         respons: 200,
         success: true,
-        message: 'Delete user by id '+ id,
-        data: await this.userService.delete(id)
+        message: 'Delete note by id '+ id,
+        data: await this.notesService.delete(id)
       };
     } catch (error) {
       throw new InternalServerErrorException('Error while fetching tasks');

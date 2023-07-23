@@ -13,7 +13,7 @@ import { User } from './users/user.entity';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'laravel-be',
+      database: 'nestjs',
       autoLoadEntities: true,
       synchronize: true,
     }),

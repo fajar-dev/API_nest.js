@@ -6,10 +6,14 @@ import { User } from "./user.entity";
 @Injectable()
 export class UserService{
   
-  constructor(@InjectRepository(User) Private readonly userRepository: Repository<User>){}
+    constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
   findAll(){
     return this.userRepository.find();
   }
 
-}
+  findOne(id: number ) {
+    return this.userRepository.findOneBy({id: id})
+  }
+
+} 

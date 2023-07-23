@@ -9,11 +9,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'nestjs',
+      database: 'laravel-be',
       autoLoadEntities: true,
       synchronize: true,
     }),
   ],
+  controllers: [UserController],
 })
 
 export class AppModule {}

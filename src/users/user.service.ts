@@ -8,4 +8,8 @@ export class UserService{
   
   constructor(@InjectRepository(User) Private readonly userRepository: Repository<User>){}
 
+  findAll(){
+    return this.userRepository.find();
+  }
+
 }

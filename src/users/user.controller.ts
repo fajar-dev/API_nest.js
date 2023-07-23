@@ -63,4 +63,19 @@ export class UserController{
     }
   }
 
+  @Delete('/delete/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async delete( @Param('id') id: number) {
+    try {
+      return{
+        respons: 200,
+        success: true,
+        message: 'Delete user by id '+ id,
+        data: await this.userService.delete(id)
+      };
+    } catch (error) {
+      throw new InternalServerErrorException('Error while fetching tasks');
+    }
+  }
+
 }

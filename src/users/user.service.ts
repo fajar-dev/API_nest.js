@@ -25,4 +25,8 @@ export class UserService{
     return this.userRepository.save(user);
   }
 
+  update(data: CreateUserDto, id: number) {
+    return this.userRepository.save({ ...data, id: Number(id)});
+  }
+
 } 

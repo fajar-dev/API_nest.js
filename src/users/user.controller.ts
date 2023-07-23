@@ -41,8 +41,22 @@ export class UserController{
       return{
         respons: 200,
         success: true,
-        message: 'Read all user',
+        message: 'Create user',
         data: await this.userService.create(data)
+      };
+    } catch (error) {
+      throw new InternalServerErrorException('Error while fetching tasks');
+    }
+  }
+
+  @Put('/update/:id')
+  async update( @Body() data: CreateUserDto,  @Param('id') id: number) {
+    try {
+      return{
+        respons: 200,
+        success: true,
+        message: 'Update user by id '+ id,
+        data: await this.userService.update(data, id)
       };
     } catch (error) {
       throw new InternalServerErrorException('Error while fetching tasks');
